@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- contentFor('body') %>
+    <h1>Login</h1>
+
+    <div id="error-message" style="display: none;">
+        <span id="close-error">×</span>
+        <p id="error-text"></p>
+    </div>
+
+    <form action="/login" method="POST">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        const closeErrorButton = document.getElementById('close-error');
+        const errorMessageDiv = document.getElementById('error-message');
+        const errorText = document.getElementById('error-text');
+
+        closeErrorButton.addEventListener('click', () => {
+            errorMessageDiv.style.display = 'none';
+        });
+
+        // Check for error message on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const errorMsg = "<%- error_msg %>"; // Get the error message from the server
+            if (errorMsg) {
+                errorText.textContent = errorMsg;
+                errorMessageDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

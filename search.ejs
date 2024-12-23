@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <h2>Search Results for "<%= query %>"</h2>
+
+    <div class="search-results">
+        <% if (drugs.length > 0) { %>
+            <ul>
+                <% drugs.forEach(drug => { %>
+                    <li>
+                        <a href="/drugs/<%= drug._id %>"><%= drug.name %></a>
+                        (Dosage: <%= drug.dosage %>)
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No drugs found matching your query.</p>
+        <% } %>
+    </div>
+
+    <a href="/">Back to Home</a>
+</body>
+</html>

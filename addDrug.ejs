@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <%- contentFor('body') %>
+
+    <h1>Add New Drug</h1>
+    
+    <form action="/add-drug" method="POST">
+        <div>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+        </div>
+        <div>
+            <label for="dosage">Dosage:</label><br>
+            <input type="text" id="dosage" name="dosage" required><br><br>
+        </div>
+        <div>
+            <label for="manufacturer">Manufacturer:</label><br>
+            <input type="text" id="manufacturer" name="manufacturer" required><br><br>
+        </div>
+    
+        <div id="additional-fields" style="display: none;">
+            <div>
+                <label for="description">Description:</label><br>
+                <textarea id="description" name="description"></textarea><br><br>
+            </div>
+            <div>
+                <label for="category">Category:</label><br>
+                <input type="text" id="category" name="category"><br><br>
+            </div>
+            <div>
+                <label for="stock">Stock:</label><br>
+                <input type="number" id="stock" name="stock" required><br><br>
+            </div>
+            <div>
+                <label for="price">Price:</label><br>
+                <input type="number" id="price" name="price" step="0.01" required><br><br>
+            </div>
+            <div>
+                <label for="expiryDate">Expiry Date:</label><br>
+                <input type="date" id="expiryDate" name="expiryDate" required><br><br>
+            </div>
+        </div>
+    
+        <button type="button" id="toggle-fields">Show More Fields</button>
+        <button type="submit">Add Drug</button>
+    </form>
+    
+    <script>
+        const toggleFieldsButton = document.getElementById('toggle-fields');
+        const additionalFields = document.getElementById('additional-fields');
+    
+        toggleFieldsButton.addEventListener('click', () => {
+            if (additionalFields.style.display === 'none') {
+                additionalFields.style.display = 'block';
+                toggleFieldsButton.textContent = 'Show Less Fields';
+            } else {
+                additionalFields.style.display = 'none';
+                toggleFieldsButton.textContent = 'Show More Fields';
+            }
+        });
+    </script>
+</body>
+</html>

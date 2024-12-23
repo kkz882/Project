@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+
+<% if (typeof user !== 'undefined' && user !== null) { %>
+<a href="/add-drug">Add New Drug</a>
+<% } %>
+
+<form action="/search" method="GET">
+    <input type="text" id="query" name="query" placeholder="Search for drugs...">
+    <button type="submit">Search</button>
+</form>
+
+<h2>Drugs</h2>
+<% if (drugs && drugs.length > 0) { %>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Dosage</th>
+                <th>Manufacturer</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Expiry Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% drugs.forEach(drug => { %>
+                <tr>
+                    <td><a href="/drugs/<%= drug._id %>"><%= drug.name %></a></td>
+                    <td><%= drug.dosage %></td>
+                    <td><%= drug.manufacturer %></td>
+                    <td><%= drug.description %></td>
+                    <td><%= drug.category %></td>
+                    <td><%= drug.stock %></td>
+                    <td><%= drug.price %></td>
+                    <td><%= drug.expiryDate ? drug.expiryDate.toLocaleDateString() : '' %></td>
+                    <td>
+                        <a href="/drugs/edit/<%= drug._id %>" class="button">Edit</a>
+                        <form action="/drugs/<%= drug._id %>?_method=DELETE" method="POST" style="display: inline;">
+                            <button type="submit" class="button button-delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+<% } else { %>
+    <p>No drugs found.</p>
+<% } %>
+
+<!-- Pagination Links -->
+<div>
+    <% if (page > 1) { %>
+        <a href="/?page=<%= page - 1 %>">Previous</a>
+    <% } %>
+
+    <% for (let i = 1; i <= totalPages; i++) { %>
+        <a href="/?page=<%= i %>"><%= i %></a>
+    <% } %>
+
+    <% if (page < totalPages) { %>
+        <a href="/?page=<%= page + 1 %>">Next</a>
+    <% } %>
+</div>
+</body>
+</html>

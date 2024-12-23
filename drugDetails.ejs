@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<h1><%= drug.name %></h1>
+
+<p><strong>Dosage:</strong> <%= drug.dosage %></p>
+<p><strong>Manufacturer:</strong> <%= drug.manufacturer %></p>
+<p><strong>Description:</strong> <%= drug.description %></p>
+<p><strong>Category:</strong> <%= drug.category %></p>
+<p><strong>Stock:</strong> <%= drug.stock %></p>
+<p><strong>Price:</strong> <%= drug.price %></p>
+<p><strong>Expiry Date:</strong> <%= drug.expiryDate ? drug.expiryDate.toLocaleDateString() : 'N/A' %></p>
+
+<a href="/" class="button">Back to Home</a>
+<% if (typeof user !== 'undefined' && user !== null && user.role === 'admin') { %>
+    <a href="/drugs/edit/<%= drug._id %>" class="button">Edit</a> <form action="/drugs/<%= drug._id %>?_method=DELETE" method="POST" style="display: inline;">
+        <button type="submit" class="button button-delete">Delete</button>
+    </form>
+<% } %>
+</body>
+</html>
